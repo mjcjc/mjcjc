@@ -1,14 +1,4 @@
-- Hi I'm Jun
-- I’m interested in Maplestory So I want go NXC
-- why you want go NXC?
-- I have a game that I've been playing for a long time. that is Maplestory. I'm playing the game continuously. 
-- You want to do it with me? you can do it. 
-- how? the server is I'm doing in KMS luna.
-- What are you going to use Github for?
-- This github is will write down my source code and explain it in kor and eng
-- The conclusion is that I will write down my source code 
-- This is my introduction.
-- It will continue to be added here.
+그냥 공부하기 위해서 만들엇습니다.
 - 📫 How to reach me ...
 
 <!---

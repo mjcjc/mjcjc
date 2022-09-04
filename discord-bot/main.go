@@ -67,20 +67,6 @@ var (
 			},
 		},
 		{
-			Name:        "메소시세",
-			Description: "메소시세 확인--버닝, 리부트는 제외",
-			Type:        discordgo.ChatApplicationCommand,
-			Options: []*discordgo.ApplicationCommandOption{
-				{
-					Name:         "서버",
-					Description:  "서버",
-					Type:         discordgo.ApplicationCommandOptionString,
-					Required:     true,
-					Autocomplete: true,
-				},
-			},
-		},
-		{
 			Name:        "환산-주스탯-사이트-검색",
 			Description: "환산 엑셀시트 나옴",
 			Type:        discordgo.ChatApplicationCommand,
@@ -178,7 +164,6 @@ var (
 			},
 		},
 	}
-	// 작 알아내는법, 분배금 결정, 보스별 수에큐 몇개
 	commandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
 		"도움": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			helpMsg := `명령어 사용 ex) /도움
@@ -187,7 +172,7 @@ var (
 3. 각종 주간보스 결정석 가격 / 수에큐 확인
 4. 작-계산기(데벤X)
 5. 분배금 결정
-6. 메소시세`
+`
 			// 입력하실때 스타포스-장비-힘-덱-럭-인-공-마 순으로 하셔아합니다!!
 			// 잘못 입력하면 원하는 값과 다르게 나와요!!!!
 			helpMsg = "```" + helpMsg + "```"
@@ -386,98 +371,6 @@ var (
 						fmt.Println(err.Error())
 					}
 				}()
-			}
-		},
-		"메소시세": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
-			switch i.Type {
-			case discordgo.InteractionApplicationCommand:
-				data := i.ApplicationCommandData()
-
-				var content string
-				if price, ok := MesoPrice[data.Options[0].StringValue()]; ok {
-					content = fmt.Sprintf(
-						"```%s 서버의 메소시세 : %s\n 머쉬빌리지 가격 따옴.```",
-						data.Options[0].StringValue(),
-						price,
-					)
-				} else {
-					content = fmt.Sprintf(
-						"%q 는 KMS에 없는 서버입니다.",
-						data.Options[0].StringValue(),
-					)
-				}
-
-				err := s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
-					Type: discordgo.InteractionResponseChannelMessageWithSource,
-					Data: &discordgo.InteractionResponseData{
-						Content: content,
-					},
-				})
-				if err != nil {
-					fmt.Println(err.Error())
-				}
-			// Autocomplete options introduce a new interaction type (8) for returning custom autocomplete results.
-			case discordgo.InteractionApplicationCommandAutocomplete:
-				choices := []*discordgo.ApplicationCommandOptionChoice{
-					{
-						Name:  "스카니아",
-						Value: "스카니아",
-					},
-					{
-						Name:  "베라",
-						Value: "베라",
-					},
-					{
-						Name:  "루나",
-						Value: "루나",
-					},
-					{
-						Name:  "제니스",
-						Value: "제니스",
-					},
-					{
-						Name:  "크로아",
-						Value: "크로아",
-					},
-					{
-						Name:  "유니온",
-						Value: "유니온",
-					},
-					{
-						Name:  "엘리시움",
-						Value: "엘리시움",
-					},
-					{
-						Name:  "이노시스",
-						Value: "이노시스",
-					},
-					{
-						Name:  "레드",
-						Value: "레드",
-					},
-					{
-						Name:  "오로라",
-						Value: "오로라",
-					},
-					{
-						Name:  "아케인",
-						Value: "아케인",
-					},
-					{
-						Name:  "노바",
-						Value: "노바",
-					},
-					// And so on, up to 25 choices
-				}
-				err := s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
-					Type: discordgo.InteractionApplicationCommandAutocompleteResult,
-					Data: &discordgo.InteractionResponseData{
-						Choices: choices, // This is basically the whole purpose of autocomplete interaction - return custom options to the user.
-					},
-				})
-				if err != nil {
-					fmt.Println(err.Error())
-				}
 			}
 		},
 

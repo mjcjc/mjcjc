@@ -4,7 +4,7 @@ var bossPrice map[string]string
 
 func init() {
 	bossPrice = make(map[string]string)
-	bossPrice["카오스 자쿰"] = "9,741,285 수에큐 :"
+	bossPrice["카오스 자쿰"] = "9,741,285 "
 	bossPrice["하드 매그너스"] = "11,579,023"
 	bossPrice["하드 힐라"] = "6,936,489"
 	bossPrice["카오스 파풀라투스"] = "26,725,937"
